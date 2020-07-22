@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.AuditResultMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.model.AuditResult" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="project_id" property="projectId" jdbcType="VARCHAR" />
+    <result column="audit_code" property="auditCode" jdbcType="VARCHAR" />
+    <result column="model_id" property="modelId" jdbcType="VARCHAR" />
+    <result column="component_uid" property="componentUid" jdbcType="VARCHAR" />
+    <result column="audit_item_code" property="auditItemCode" jdbcType="VARCHAR" />
+    <result column="audit_item_result" property="auditItemResult" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, project_id, audit_code, model_id, component_uid, audit_item_code, audit_item_result, 
+    update_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from audit_result
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from audit_result
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.model.AuditResult" >
+    insert into audit_result (id, project_id, audit_code, 
+      model_id, component_uid, audit_item_code, 
+      audit_item_result, update_date)
+    values (#{id,jdbcType=BIGINT}, #{projectId,jdbcType=VARCHAR}, #{auditCode,jdbcType=VARCHAR}, 
+      #{modelId,jdbcType=VARCHAR}, #{componentUid,jdbcType=VARCHAR}, #{auditItemCode,jdbcType=VARCHAR}, 
+      #{auditItemResult,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.model.AuditResult" >
+    insert into audit_result
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="auditCode != null" >
+        audit_code,
+      </if>
+      <if test="modelId != null" >
+        model_id,
+      </if>
+      <if test="componentUid != null" >
+        component_uid,
+      </if>
+      <if test="auditItemCode != null" >
+        audit_item_code,
+      </if>
+      <if test="auditItemResult != null" >
+        audit_item_result,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="auditCode != null" >
+        #{auditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="modelId != null" >
+        #{modelId,jdbcType=VARCHAR},
+      </if>
+      <if test="componentUid != null" >
+        #{componentUid,jdbcType=VARCHAR},
+      </if>
+      <if test="auditItemCode != null" >
+        #{auditItemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="auditItemResult != null" >
+        #{auditItemResult,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.AuditResult" >
+    update audit_result
+    <set >
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="auditCode != null" >
+        audit_code = #{auditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="modelId != null" >
+        model_id = #{modelId,jdbcType=VARCHAR},
+      </if>
+      <if test="componentUid != null" >
+        component_uid = #{componentUid,jdbcType=VARCHAR},
+      </if>
+      <if test="auditItemCode != null" >
+        audit_item_code = #{auditItemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="auditItemResult != null" >
+        audit_item_result = #{auditItemResult,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.AuditResult" >
+    update audit_result
+    set project_id = #{projectId,jdbcType=VARCHAR},
+      audit_code = #{auditCode,jdbcType=VARCHAR},
+      model_id = #{modelId,jdbcType=VARCHAR},
+      component_uid = #{componentUid,jdbcType=VARCHAR},
+      audit_item_code = #{auditItemCode,jdbcType=VARCHAR},
+      audit_item_result = #{auditItemResult,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
