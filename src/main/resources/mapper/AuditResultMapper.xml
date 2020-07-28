@@ -1,35 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo.mapper.AuditResultMapper">
-  <resultMap id="BaseResultMap" type="com.example.demo.model.AuditResult">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="project_id" jdbcType="VARCHAR" property="projectId" />
-    <result column="audit_code" jdbcType="VARCHAR" property="auditCode" />
-    <result column="model_id" jdbcType="VARCHAR" property="modelId" />
-    <result column="component_uid" jdbcType="VARCHAR" property="componentUid" />
-    <result column="audit_item_code" jdbcType="VARCHAR" property="auditItemCode" />
-    <result column="audit_item_result" jdbcType="VARCHAR" property="auditItemResult" />
-    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.AuditResultMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.model.AuditResult" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="project_id" property="projectId" jdbcType="VARCHAR" />
+    <result column="audit_code" property="auditCode" jdbcType="VARCHAR" />
+    <result column="model_id" property="modelId" jdbcType="VARCHAR" />
+    <result column="component_uid" property="componentUid" jdbcType="VARCHAR" />
+    <result column="audit_item_code" property="auditItemCode" jdbcType="VARCHAR" />
+    <result column="audit_item_result" property="auditItemResult" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
   </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -40,25 +40,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -69,42 +69,42 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List" >
     id, project_id, audit_code, model_id, component_uid, audit_item_code, audit_item_result, 
     update_date
   </sql>
-  <select id="selectByExample" parameterType="com.example.demo.model.AuditResultExample" resultMap="BaseResultMap">
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.demo.model.AuditResultExample" >
     select
-    <if test="distinct">
+    <if test="distinct" >
       distinct
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
     from audit_result
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null">
+    <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from audit_result
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from audit_result
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.example.demo.model.AuditResultExample">
+  <delete id="deleteByExample" parameterType="com.example.demo.model.AuditResultExample" >
     delete from audit_result
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.example.demo.model.AuditResult">
+  <insert id="insert" parameterType="com.example.demo.model.AuditResult" >
     insert into audit_result (id, project_id, audit_code, 
       model_id, component_uid, audit_item_code, 
       audit_item_result, update_date)
@@ -112,100 +112,100 @@
       #{modelId,jdbcType=VARCHAR}, #{componentUid,jdbcType=VARCHAR}, #{auditItemCode,jdbcType=VARCHAR}, 
       #{auditItemResult,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.demo.model.AuditResult">
+  <insert id="insertSelective" parameterType="com.example.demo.model.AuditResult" >
     insert into audit_result
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
         id,
       </if>
-      <if test="projectId != null">
+      <if test="projectId != null" >
         project_id,
       </if>
-      <if test="auditCode != null">
+      <if test="auditCode != null" >
         audit_code,
       </if>
-      <if test="modelId != null">
+      <if test="modelId != null" >
         model_id,
       </if>
-      <if test="componentUid != null">
+      <if test="componentUid != null" >
         component_uid,
       </if>
-      <if test="auditItemCode != null">
+      <if test="auditItemCode != null" >
         audit_item_code,
       </if>
-      <if test="auditItemResult != null">
+      <if test="auditItemResult != null" >
         audit_item_result,
       </if>
-      <if test="updateDate != null">
+      <if test="updateDate != null" >
         update_date,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="projectId != null">
+      <if test="projectId != null" >
         #{projectId,jdbcType=VARCHAR},
       </if>
-      <if test="auditCode != null">
+      <if test="auditCode != null" >
         #{auditCode,jdbcType=VARCHAR},
       </if>
-      <if test="modelId != null">
+      <if test="modelId != null" >
         #{modelId,jdbcType=VARCHAR},
       </if>
-      <if test="componentUid != null">
+      <if test="componentUid != null" >
         #{componentUid,jdbcType=VARCHAR},
       </if>
-      <if test="auditItemCode != null">
+      <if test="auditItemCode != null" >
         #{auditItemCode,jdbcType=VARCHAR},
       </if>
-      <if test="auditItemResult != null">
+      <if test="auditItemResult != null" >
         #{auditItemResult,jdbcType=VARCHAR},
       </if>
-      <if test="updateDate != null">
+      <if test="updateDate != null" >
         #{updateDate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.demo.model.AuditResultExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.example.demo.model.AuditResultExample" resultType="java.lang.Integer" >
     select count(*) from audit_result
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+  <update id="updateByExampleSelective" parameterType="map" >
     update audit_result
-    <set>
-      <if test="record.id != null">
+    <set >
+      <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.projectId != null">
+      <if test="record.projectId != null" >
         project_id = #{record.projectId,jdbcType=VARCHAR},
       </if>
-      <if test="record.auditCode != null">
+      <if test="record.auditCode != null" >
         audit_code = #{record.auditCode,jdbcType=VARCHAR},
       </if>
-      <if test="record.modelId != null">
+      <if test="record.modelId != null" >
         model_id = #{record.modelId,jdbcType=VARCHAR},
       </if>
-      <if test="record.componentUid != null">
+      <if test="record.componentUid != null" >
         component_uid = #{record.componentUid,jdbcType=VARCHAR},
       </if>
-      <if test="record.auditItemCode != null">
+      <if test="record.auditItemCode != null" >
         audit_item_code = #{record.auditItemCode,jdbcType=VARCHAR},
       </if>
-      <if test="record.auditItemResult != null">
+      <if test="record.auditItemResult != null" >
         audit_item_result = #{record.auditItemResult,jdbcType=VARCHAR},
       </if>
-      <if test="record.updateDate != null">
+      <if test="record.updateDate != null" >
         update_date = #{record.updateDate,jdbcType=TIMESTAMP},
       </if>
     </set>
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map">
+  <update id="updateByExample" parameterType="map" >
     update audit_result
     set id = #{record.id,jdbcType=BIGINT},
       project_id = #{record.projectId,jdbcType=VARCHAR},
@@ -215,163 +215,38 @@
       audit_item_code = #{record.auditItemCode,jdbcType=VARCHAR},
       audit_item_result = #{record.auditItemResult,jdbcType=VARCHAR},
       update_date = #{record.updateDate,jdbcType=TIMESTAMP}
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.AuditResult">
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.AuditResult" >
     update audit_result
-    <set>
-      <if test="projectId != null">
+    <set >
+      <if test="projectId != null" >
         project_id = #{projectId,jdbcType=VARCHAR},
       </if>
-      <if test="auditCode != null">
+      <if test="auditCode != null" >
         audit_code = #{auditCode,jdbcType=VARCHAR},
       </if>
-      <if test="modelId != null">
+      <if test="modelId != null" >
         model_id = #{modelId,jdbcType=VARCHAR},
       </if>
-      <if test="componentUid != null">
+      <if test="componentUid != null" >
         component_uid = #{componentUid,jdbcType=VARCHAR},
       </if>
-      <if test="auditItemCode != null">
+      <if test="auditItemCode != null" >
         audit_item_code = #{auditItemCode,jdbcType=VARCHAR},
       </if>
-      <if test="auditItemResult != null">
+      <if test="auditItemResult != null" >
         audit_item_result = #{auditItemResult,jdbcType=VARCHAR},
       </if>
-      <if test="updateDate != null">
+      <if test="updateDate != null" >
         update_date = #{updateDate,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.AuditResult">
-    update audit_result
-    set project_id = #{projectId,jdbcType=VARCHAR},
-      audit_code = #{auditCode,jdbcType=VARCHAR},
-      model_id = #{modelId,jdbcType=VARCHAR},
-      component_uid = #{componentUid,jdbcType=VARCHAR},
-      audit_item_code = #{auditItemCode,jdbcType=VARCHAR},
-      audit_item_result = #{auditItemResult,jdbcType=VARCHAR},
-      update_date = #{updateDate,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <resultMap id="BaseResultMap" type="com.example.demo.model.AuditResult">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="project_id" jdbcType="VARCHAR" property="projectId" />
-    <result column="audit_code" jdbcType="VARCHAR" property="auditCode" />
-    <result column="model_id" jdbcType="VARCHAR" property="modelId" />
-    <result column="component_uid" jdbcType="VARCHAR" property="componentUid" />
-    <result column="audit_item_code" jdbcType="VARCHAR" property="auditItemCode" />
-    <result column="audit_item_result" jdbcType="VARCHAR" property="auditItemResult" />
-    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, project_id, audit_code, model_id, component_uid, audit_item_code, audit_item_result, 
-    update_date
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from audit_result
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from audit_result
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="com.example.demo.model.AuditResult">
-    insert into audit_result (id, project_id, audit_code, 
-      model_id, component_uid, audit_item_code, 
-      audit_item_result, update_date)
-    values (#{id,jdbcType=BIGINT}, #{projectId,jdbcType=VARCHAR}, #{auditCode,jdbcType=VARCHAR}, 
-      #{modelId,jdbcType=VARCHAR}, #{componentUid,jdbcType=VARCHAR}, #{auditItemCode,jdbcType=VARCHAR}, 
-      #{auditItemResult,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.example.demo.model.AuditResult">
-    insert into audit_result
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="projectId != null">
-        project_id,
-      </if>
-      <if test="auditCode != null">
-        audit_code,
-      </if>
-      <if test="modelId != null">
-        model_id,
-      </if>
-      <if test="componentUid != null">
-        component_uid,
-      </if>
-      <if test="auditItemCode != null">
-        audit_item_code,
-      </if>
-      <if test="auditItemResult != null">
-        audit_item_result,
-      </if>
-      <if test="updateDate != null">
-        update_date,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="projectId != null">
-        #{projectId,jdbcType=VARCHAR},
-      </if>
-      <if test="auditCode != null">
-        #{auditCode,jdbcType=VARCHAR},
-      </if>
-      <if test="modelId != null">
-        #{modelId,jdbcType=VARCHAR},
-      </if>
-      <if test="componentUid != null">
-        #{componentUid,jdbcType=VARCHAR},
-      </if>
-      <if test="auditItemCode != null">
-        #{auditItemCode,jdbcType=VARCHAR},
-      </if>
-      <if test="auditItemResult != null">
-        #{auditItemResult,jdbcType=VARCHAR},
-      </if>
-      <if test="updateDate != null">
-        #{updateDate,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.AuditResult">
-    update audit_result
-    <set>
-      <if test="projectId != null">
-        project_id = #{projectId,jdbcType=VARCHAR},
-      </if>
-      <if test="auditCode != null">
-        audit_code = #{auditCode,jdbcType=VARCHAR},
-      </if>
-      <if test="modelId != null">
-        model_id = #{modelId,jdbcType=VARCHAR},
-      </if>
-      <if test="componentUid != null">
-        component_uid = #{componentUid,jdbcType=VARCHAR},
-      </if>
-      <if test="auditItemCode != null">
-        audit_item_code = #{auditItemCode,jdbcType=VARCHAR},
-      </if>
-      <if test="auditItemResult != null">
-        audit_item_result = #{auditItemResult,jdbcType=VARCHAR},
-      </if>
-      <if test="updateDate != null">
-        update_date = #{updateDate,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.AuditResult">
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.AuditResult" >
     update audit_result
     set project_id = #{projectId,jdbcType=VARCHAR},
       audit_code = #{auditCode,jdbcType=VARCHAR},
